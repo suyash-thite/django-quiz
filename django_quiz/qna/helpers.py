@@ -7,5 +7,4 @@ def generateresponse(status, modelobject, data):
                 modelobject: data
             }
         }
-
     return response

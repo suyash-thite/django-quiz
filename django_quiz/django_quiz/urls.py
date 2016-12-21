@@ -15,8 +15,10 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from login.views import LoginView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api/v1/questions', include('qna.urls')),
+    url(r'^api/v1/auth/login/$', LoginView.as_view(), name='login'),
 ]
