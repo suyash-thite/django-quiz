@@ -6,7 +6,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from helpers import generateresponse
-from serializers import QuestionSerializer
+from serializers import QuestionSerializer,CategorySerializer
 
 
 class QuestionList(APIView):
@@ -27,27 +27,27 @@ class QuestionList(APIView):
             print e
         return Response(response)
 
-    # def post(self, request, emp_id):
-    #     try:
-    #         Employee.employee.get(pk=emp_id)
-    #     except ObjectDoesNotExist:
-    #         raise EmployeeDoesNotExist()
-    #     serializer = TaskSerializer(data=request.data)
-    #     validate_task = validatetask(serializer.initial_data, post=True)
-    #     if validate_task:
-    #         try:
-    #             if serializer.is_valid():
-    #                 serializer.save()
-    #                 response = generateresponse(
-    #                     'Success', 'tasks', serializer.data)
-    #         except Exception as e:
-    #             response = {
-    #                 "status": status.HTTP_400_BAD_REQUEST,
-    #                 "data": {
-    #                     "post": serializer.data}}
-    #     return Response(response)
+    def post(self, request):
+        data = request.data
+        serializer = QuestionSerializer(data=data)
+        try:
+            if serializer.is_valid():
+                serializer.save()
+                response = generateresponse('Success','Question',serializer.data)
+                return Response(response)
+        except:
+            response = {
+                      "status": status.HTTP_400_BAD_REQUEST,
+                      "data": {
+                          "post": serializer.data}}
+        return Response(response)
+
+
 
 class QuestionDetail(APIView):
+    """
+    API to get deatils of questions
+    """
     def get_object(self, pk):
         try:
             return Question.objects.get(pk=pk)
@@ -119,3 +119,38 @@ class QuestionDetail(APIView):
         #     task.delete()
         #     response = generateresponse('Success', 'task', 'null')
         #     return Response(response)
+
+class CategoryList(APIView):
+    """
+    List of all categories or create new category
+    """
+
+    def get(self,request):
+        response = ''
+        try:
+            categories = Category.objects.all()
+        except ObjectDoesNotExist:
+            raise ObjectDoesNotExist()
+        serializer = CategorySerializer(categories,many=True)
+        response = generateresponse('Success','Categories',serializer.data)
+        return Response(response)
+
+    def post(self,request):
+        data = request.data
+        serializer = CategorySerializer(data = data)
+        try:
+            if serializer.is_valid():
+                serializer.save()
+                response = generateresponse('Success','Category',serializer.data)
+                return Response(response)
+        except:
+            response = {
+                      "status": status.HTTP_400_BAD_REQUEST,
+                      "data": {
+                          "post": serializer.data}}
+        return Response(response)
+
+
+
+
+

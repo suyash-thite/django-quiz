@@ -15,7 +15,7 @@ class Question(models.Model):
 
 class Options(models.Model):
     question = models.OneToOneField('Question', blank=False, null=False)
-    number_of_options = models.IntegerField(False)
+    number_of_options = models.IntegerField(blank=False)
     options = models.TextField(blank=False)
 
 

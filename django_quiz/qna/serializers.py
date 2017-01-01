@@ -30,22 +30,49 @@ class BaseSerializer(serializers.ModelSerializer):
                     pass
 
 
-class QuestionSerializer(serializers.ModelSerializer):
-    """
-    Serializer for Taskdate object from login.models
-    """
-    class Meta:
-        model = Question
-        fields = '__all__'
-        depth = 1
-
-
-
-
 class AnswerSerializer(BaseSerializer):
     """
-    Serializer for Taskdate object from login.models
+    Serializer for Answer object from answer.models
     """
     class Meta:
         model = Answers
         fields = '__all__'
+
+
+class CategorySerializer(serializers.ModelSerializer):
+    """
+    Serializer for Category object from qna.models
+    """
+
+    class Meta:
+        model = Category
+        fields = '__all__'
+        depth = 1
+
+
+class QuestionSerializer(serializers.ModelSerializer):
+    """
+    Serializer for Question object from qna.models
+    """
+    question_category = CategorySerializer(many=True)
+
+    class Meta:
+        model = Question
+        fields =  ('id', 'question_identifier','question_text','question_tags','question_category')
+        depth = 1
+
+    def create(self, validated_data):
+        question = Question.objects.create(question_identifier=validated_data['question_identifier'],
+                                           question_text=validated_data['question_text'],
+                                           question_tags=validated_data['question_tags'])
+
+        for quest_category in validated_data['question_category']:
+            try:
+                category = Category.objects.get(category_name = quest_category['category_name'])
+                question.question_category.add(category)
+                question.save()
+            except Exception as e:
+                print e
+
+        return question
+
