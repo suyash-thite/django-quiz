@@ -15,8 +15,11 @@ class Question(models.Model):
 
 class Options(models.Model):
     question = models.OneToOneField('Question', blank=False, null=False)
-    number_of_options = models.IntegerField(False)
+    number_of_options = models.IntegerField(blank=False)
     options = models.TextField(blank=False)
+
+    def __str__(self):
+        return "%s:%s" % (self.pk, self.question.question_identifier)
 
 
 class Answers(models.Model):

@@ -1,12 +1,12 @@
 from django.shortcuts import render
 
 from models import Question, Answers, Category, Options
-from django.core.exceptions import ObjectDoesNotExist
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from helpers import generateresponse
-from serializers import QuestionSerializer
+from serializers import QuestionSerializer,CategorySerializer,OptionSerializer
+from django_quiz.exceptions import InvalidData,ObjectDoesNotExist
 
 
 class QuestionList(APIView):
@@ -18,8 +18,8 @@ class QuestionList(APIView):
         response = ''
         try:
             questions = Question.objects.all()
-        except ObjectDoesNotExist:
-            raise ObjectDoesNotExist()
+        except:
+            raise ObjectDoesNotExist('Question does not exist')
         try:
             serializer = QuestionSerializer(questions, many=True)
             response = generateresponse('Success', 'Questions', serializer.data)
@@ -27,32 +27,29 @@ class QuestionList(APIView):
             print e
         return Response(response)
 
-    # def post(self, request, emp_id):
-    #     try:
-    #         Employee.employee.get(pk=emp_id)
-    #     except ObjectDoesNotExist:
-    #         raise EmployeeDoesNotExist()
-    #     serializer = TaskSerializer(data=request.data)
-    #     validate_task = validatetask(serializer.initial_data, post=True)
-    #     if validate_task:
-    #         try:
-    #             if serializer.is_valid():
-    #                 serializer.save()
-    #                 response = generateresponse(
-    #                     'Success', 'tasks', serializer.data)
-    #         except Exception as e:
-    #             response = {
-    #                 "status": status.HTTP_400_BAD_REQUEST,
-    #                 "data": {
-    #                     "post": serializer.data}}
-    #     return Response(response)
+    def post(self, request):
+        data = request.data
+        serializer = QuestionSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            response = generateresponse('Success','Question',serializer.data)
+            return Response(response)
+        else:
+            raise InvalidData(serializer.errors)
+
+
+
+
 
 class QuestionDetail(APIView):
+    """
+    API to get deatils of questions
+    """
     def get_object(self, pk):
         try:
             return Question.objects.get(pk=pk)
-        except Question.DoesNotExist:
-            raise ObjectDoesNotExist
+        except:
+            raise ObjectDoesNotExist('Question does not exist')
 
     def get(self, request, question_id):
         question = self.get_object(question_id)
@@ -119,3 +116,51 @@ class QuestionDetail(APIView):
         #     task.delete()
         #     response = generateresponse('Success', 'task', 'null')
         #     return Response(response)
+
+class CategoryList(APIView):
+    """
+    List of all categories or create new category
+    """
+
+    def get(self,request):
+        try:
+            categories = Category.objects.all()
+        except:
+            raise ObjectDoesNotExist('Categories do not exist')
+        serializer = CategorySerializer(categories,many=True)
+        response = generateresponse('Success','Categories',serializer.data)
+        return Response(response)
+
+    def post(self,request):
+        data = request.data
+        serializer = CategorySerializer(data = data)
+        if serializer.is_valid():
+            serializer.save()
+            response = generateresponse('Success','Category',serializer.data)
+            return Response(response)
+        else:
+            raise InvalidData(serializer.errors)
+
+class OptionDetail(APIView):
+    """
+    Lists and modifies options
+    """
+
+    def get(self,request):
+        question_id = request.query_params['question_id']
+        try:
+            question = Question.objects.get(id = question_id)
+        except:
+            raise ObjectDoesNotExist('Question does not exist')
+        try:
+            options = Options.objects.get(question = question)
+        except:
+            raise ObjectDoesNotExist('Options does not exist')
+        serializer = OptionSerializer(options)
+        response = ('Success','Options',serializer.data)
+        return Response(response)
+
+
+
+
+

@@ -22,7 +22,7 @@ from rest_framework import routers
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^api/v1/questions', include('qna.urls')),
+    url(r'^api/v1/qna/', include('qna.urls')),
     url(r'^api/v1/auth/login/$', LoginView.as_view(), name='login'),
     url(r'^api/v1/auth/register/$', RegisterView.as_view(), name='register'),
 ]
