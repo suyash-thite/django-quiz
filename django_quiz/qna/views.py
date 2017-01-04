@@ -141,9 +141,9 @@ class CategoryList(APIView):
         else:
             raise InvalidData(serializer.errors)
 
-class OptionDetail(APIView):
+class OptionList(APIView):
     """
-    Lists and modifies options
+    Lists options for a particular question
     """
 
     def get(self,request):
@@ -157,8 +157,13 @@ class OptionDetail(APIView):
         except:
             raise ObjectDoesNotExist('Options does not exist')
         serializer = OptionSerializer(options)
-        response = ('Success','Options',serializer.data)
+        response = generateresponse('Success','Options',serializer.data)
         return Response(response)
+
+
+
+
+
 
 
 

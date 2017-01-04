@@ -35,3 +35,4 @@ class InvalidData(APIException):
 class ObjectDoesNotExist(APIException):
     status_code = 704
     default_detail = 'Object does not Exist'
+
