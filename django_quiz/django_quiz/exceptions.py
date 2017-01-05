@@ -22,8 +22,17 @@ def QuizExceptionHandler(exc, context):
 
 class InvalidCredentials(APIException):
     status_code = 701
-    default_detail = 'User does not exist'
+    default_detail = 'Invalid Credentials'
 
 class InvalidInformation(APIException):
     status_code = 702
     default_detail = 'Incorrect or invalid Information'
+
+class InvalidData(APIException):
+    status_code = 703
+    default_detail = 'Incorrect Post Data'
+
+class ObjectDoesNotExist(APIException):
+    status_code = 704
+    default_detail = 'Object does not Exist'
+

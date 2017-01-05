@@ -1,5 +1,8 @@
 from models import Question, Answers, Category, Options
 from rest_framework import serializers
+from django_quiz.exceptions import ObjectDoesNotExist
+
+
 
 class BaseSerializer(serializers.ModelSerializer):
     """
@@ -22,32 +25,33 @@ class BaseSerializer(serializers.ModelSerializer):
                 self.fields.pop(field_name)
         if exclude:
             # Drop fields that are specified in the `exclude` argument.
-            excluded = set(exclude)
-            for field_name in excluded:
+            for field_name in exclude:
                 try:
                     self.fields.pop(field_name)
                 except KeyError:
                     pass
 
 
-class AnswerSerializer(BaseSerializer):
-    """
-    Serializer for Answer object from answer.models
-    """
-    class Meta:
-        model = Answers
-        fields = '__all__'
-
-
 class CategorySerializer(serializers.ModelSerializer):
     """
     Serializer for Category object from qna.models
     """
+    model = Question
+    fields =  ('id', 'question_identifier','question_text','question_tags','question_category')
+    depth = 1
 
-    class Meta:
-        model = Category
+
+
+class AnswerSerializer(serializers.ModelSerializer):
+     """
+     Answer Serializer
+     """
+     class Meta:
+        model = Answers
         fields = '__all__'
-        depth = 1
+
+
+
 
 
 class QuestionSerializer(serializers.ModelSerializer):
@@ -57,22 +61,36 @@ class QuestionSerializer(serializers.ModelSerializer):
     question_category = CategorySerializer(many=True)
 
     class Meta:
-        model = Question
-        fields =  ('id', 'question_identifier','question_text','question_tags','question_category')
-        depth = 1
+        model = Answers
+        fields = '__all__'
+
+
+
 
     def create(self, validated_data):
-        question = Question.objects.create(question_identifier=validated_data['question_identifier'],
-                                           question_text=validated_data['question_text'],
-                                           question_tags=validated_data['question_tags'])
-
         for quest_category in validated_data['question_category']:
             try:
-                category = Category.objects.get(category_name = quest_category['category_name'])
+                category = Category.objects.get(category_name=quest_category['category_name'])
+                question = Question.objects.create(question_identifier=validated_data['question_identifier'],
+                                                   question_text=validated_data['question_text'],
+                                                   question_tags=validated_data['question_tags'])
                 question.question_category.add(category)
-                question.save()
-            except Exception as e:
-                print e
+                return question
+            except:
+                raise ObjectDoesNotExist('Category Name does not exist')
 
-        return question
+
+
+class OptionSerializer(serializers.ModelSerializer):
+    """
+    Serializer for options from qna.models
+    """
+
+
+    class Meta:
+        model = Options
+        fields = '__all__'
+        depth = 2
+
+
 
