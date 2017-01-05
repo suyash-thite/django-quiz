@@ -38,9 +38,6 @@ class QuestionList(APIView):
             raise InvalidData(serializer.errors)
 
 
-
-
-
 class QuestionDetail(APIView):
     """
     API to get deatils of questions
@@ -57,65 +54,6 @@ class QuestionDetail(APIView):
         response = generateresponse('Success', 'question', serializer.data)
         return Response(response)
 
-        # def put(self, request, emp_id, task_id):
-        #     validate_login(request)
-        #     try:
-        #         Employee.employee.get(pk=emp_id)
-        #     except ObjectDoesNotExist:
-        #         raise EmployeeDoesNotExist("This Employee Does Not Exist")
-        #     task = self.get_object(task_id)
-        #     serializer = TaskSerializer(
-        #         task, data=request.data, context={
-        #             'request': request})
-        #     validate_task = validatetask(
-        #         serializer.initial_data,
-        #         post=False,
-        #         task_id=task_id)
-        #     if validate_task:
-        #         if serializer.is_valid():
-        #             serializer.save()
-        #             return Response(serializer.data)
-        #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        #
-        # def patch(self, request, emp_id, task_id):
-        #     validate_login(request)
-        #     is_rejected = False
-        #     try:
-        #         Employee.employee.get(pk=emp_id)
-        #     except ObjectDoesNotExist:
-        #         raise EmployeeDoesNotExist("This Employee Does Not Exist")
-        #     if "task_name" in request.data:
-        #         if request.data.get("task_name") == '':
-        #             raise InvalidData("Task name cannot be empty")
-        #     task = self.get_object(task_id)
-        #     month = task.tasks.first().task_date.month
-        #     year = task.tasks.first().task_date.year
-        #     is_submitted = SubmittedTimesheet.objects.filter(
-        #         emp_id=task.emp_id, month=month, year=year)
-        #     if is_submitted.exists():
-        #         for timesheet in is_submitted:
-        #             if timesheet.approved == 'Rejected':
-        #                 is_rejected = True
-        #         if is_rejected is not True:
-        #             raise TimesheetAlreadySubmitted
-        #     serializer = TaskSerializer(
-        #         task, data=request.data, partial=True, context={
-        #             'request': request})
-        #     if serializer.is_valid():
-        #         serializer.save()
-        #         return Response(serializer.data)
-        #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        #
-        # def delete(self, request, emp_id, task_id):
-        #     validate_login(request)
-        #     try:
-        #         Employee.employee.get(pk=emp_id)
-        #     except ObjectDoesNotExist:
-        #         raise EmployeeDoesNotExist("Employee Does Not Exist")
-        #     task = self.get_object(task_id)
-        #     task.delete()
-        #     response = generateresponse('Success', 'task', 'null')
-        #     return Response(response)
 
 class CategoryList(APIView):
     """

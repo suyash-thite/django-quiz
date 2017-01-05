@@ -54,10 +54,12 @@ MIDDLEWARE_CLASSES = [
 
 ROOT_URLCONF = 'django_quiz.urls'
 
+
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR, 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -124,3 +126,9 @@ REST_FRAMEWORK = {
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = 'staticfiles'
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'dist/static'),
+    os.path.join(BASE_DIR, 'static'),
+)
