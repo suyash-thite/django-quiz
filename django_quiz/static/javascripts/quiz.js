@@ -6,14 +6,17 @@
 angular
     .module('quiz',['ngMaterial',
                     'ngMessages',
-                    'material.svgAssetsCache',
                     'ngCookies',
                     'ngResource',
+                    'quiz.routes',
                     'quiz.layout',
                     'quiz.authentication'
                     ]).config(function($resourceProvider) {
                                     $resourceProvider.defaults.stripTrailingSlashes = false;
                                     });
+
+angular
+    .module('quiz.routes',['ui.router']);
 
  angular
     .module('quiz')

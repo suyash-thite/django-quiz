@@ -12,7 +12,9 @@
     Authentication.$inject = ['$resource'];
 
     function Authentication($resource){
-        return $resource('/api/v1/auth/register/')
+        return {
+         Register:$resource('/api/v1/auth/register/')
+        }
     }
 
 

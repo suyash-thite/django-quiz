@@ -12,6 +12,7 @@
     AuthenticationController.$inject = ['$scope','Authentication'];
 
     function AuthenticationController($scope,Authentication){
+        console.log("in");
 
         // Sign Up user
         $scope.signUp = function(){
@@ -23,8 +24,7 @@
                 "email":$scope.email,
                 "password":$scope.password
             };
-           var user =  Authentication.save(required_object);
-
+           var user =  Authentication.Register.save(required_object);
 
         }
 

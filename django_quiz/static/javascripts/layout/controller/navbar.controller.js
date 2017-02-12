@@ -18,8 +18,6 @@ angular
         else{
             $scope.logged_in = false;
         }
-
-        console.log($scope.logged_in);
     }
 
 
