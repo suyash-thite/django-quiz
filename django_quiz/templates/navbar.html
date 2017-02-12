@@ -1,12 +1,12 @@
-<nav class="navbar navbar-default" role="navigation" ng-controller="NavbarController">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapse" data-toggle="collapse">
-                <span class="sr-only">Toggle Navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">Quiz</a>
-        </div>
-    </div>
-</nav>
+{% load staticfiles %}
+<div ng-controller="NavbarController" ng-cloak="" class="navBar">
+    <md-content>
+        <md-nav-bar md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links">
+            <img src="{% static 'images/quiz.jpg' %}" id="logo">
+            <md-nav-item md-nav-click="goto('page1')" name="page1" ng-show="logged_in">Home</md-nav-item>
+            <md-nav-item md-nav-click="goto('page2')" name="page2" ng-show="logged_in">Page Two</md-nav-item>
+            <md-nav-item md-nav-click="goto('page3')" name="page3" ng-show="logged_in">Page Three</md-nav-item>
+
+        </md-nav-bar>
+    </md-content>
+</div>
