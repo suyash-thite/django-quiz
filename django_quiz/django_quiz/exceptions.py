@@ -26,7 +26,7 @@ class InvalidCredentials(APIException):
 
 class InvalidInformation(APIException):
     status_code = 702
-    default_detail = 'Incorrect or invalid Information'
+    default_detail = 'Incorrect or invalid Data'
 
 class InvalidData(APIException):
     status_code = 703

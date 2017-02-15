@@ -17,7 +17,7 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from login.views import LoginView,RegisterView
 from views import IndexView
-from rest_framework import routers
+from rest_framework.authtoken import views
 
 
 
@@ -26,6 +26,7 @@ urlpatterns = [
     url(r'^api/v1/qna/', include('qna.urls')),
     url(r'^api/v1/auth/login/$', LoginView.as_view(), name='login'),
     url(r'^api/v1/auth/register/$', RegisterView.as_view(), name='register'),
+    url(r'^api-token-auth/', views.obtain_auth_token),
 
     url(r'^$', IndexView.as_view(), name='index')
 ]

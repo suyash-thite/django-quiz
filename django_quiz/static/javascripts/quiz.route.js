@@ -17,7 +17,8 @@
                 controller: 'AuthenticationController'
             }).state('login',{
                 url:'/',
-                templateUrl:'/static/templates/login.html'
+                templateUrl:'/static/templates/login.html',
+                controller: 'AuthenticationController'
             });
         $locationProvider.hashPrefix("");
 

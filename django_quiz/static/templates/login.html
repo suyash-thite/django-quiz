@@ -6,7 +6,7 @@
                          <h1>Login</h1>
                           <md-divider></md-divider>
                      </div>
-                    <form class="form-register" name="register" ng-controller="AuthenticationController">
+                    <form class="form-register" name="register">
                         <div>
                             <div layout-gt-sm="row">
                                 <md-input-container class="md-block" flex-gt-sm="">
@@ -21,7 +21,8 @@
                                 </md-input-container>
                             </div>
                             <div layout-gt-sm="row">
-                                <md-button md-no-ink class="md-raised md-primary" flex-gt-sm="" ng-click="signUp()">Login</md-button>
+                                <md-button md-no-ink class="md-raised md-primary" flex-gt-sm="" ng-click="login()">Login</md-button>
+                                <md-button href="# " class="md-primary">New User? Sign Up</md-button>
                             </div>
                         </div>
                     </form>
