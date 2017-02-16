@@ -120,7 +120,12 @@ USE_L10N = True
 USE_TZ = True
 
 REST_FRAMEWORK = {
-    'EXCEPTION_HANDLER': 'django_quiz.exceptions.QuizExceptionHandler'
+    'EXCEPTION_HANDLER': 'django_quiz.common_utils.exceptions.QuizExceptionHandler',
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication'
+    )
 }
 
 # Static files (CSS, JavaScript, Images)

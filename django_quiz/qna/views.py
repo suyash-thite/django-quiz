@@ -1,13 +1,10 @@
-from django.shortcuts import render
-
-from models import Question, Answers, Category, Options
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status
+
+from models import Question, Category, Options
 from helpers import generateresponse
 from serializers import QuestionSerializer,CategorySerializer,OptionSerializer
-from django_quiz.exceptions import InvalidData,ObjectDoesNotExist
-
+from django_quiz.common_utils.exceptions import InvalidInformation,ObjectDoesNotExist
 
 
 class QuestionList(APIView):
@@ -36,7 +33,7 @@ class QuestionList(APIView):
             response = generateresponse('Success','Question',serializer.data)
             return Response(response)
         else:
-            raise InvalidData(serializer.errors)
+            raise InvalidInformation(serializer.errors)
 
 
 class QuestionDetail(APIView):
@@ -80,7 +77,7 @@ class CategoryList(APIView):
             response = generateresponse('Success','Category',serializer.data)
             return Response(response)
         else:
-            raise InvalidData(serializer.errors)
+            raise InvalidInformation(serializer.errors)
 
 class OptionList(APIView):
     """

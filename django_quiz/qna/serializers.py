@@ -1,7 +1,7 @@
-from models import Question, Answers, Category, Options
 from rest_framework import serializers
-from django_quiz.exceptions import ObjectDoesNotExist
 
+from models import Question, Answers, Category, Options
+from django_quiz.common_utils.exceptions import ObjectDoesNotExist
 
 
 class BaseSerializer(serializers.ModelSerializer):
