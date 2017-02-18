@@ -13,12 +13,16 @@
         $stateProvider
             .state('register',{
                 url:'',
-                templateUrl: '/static/templates/register.html',
+                templateUrl: '/static/templates/authentication/register.html',
                 controller: 'AuthenticationController'
             }).state('login',{
-                url:'/',
-                templateUrl:'/static/templates/login.html',
+                url:'/login',
+                templateUrl:'/static/templates/authentication/login.html',
                 controller: 'AuthenticationController'
+            }).state('home',{
+                url:'/',
+                templateUrl: '/static/templates/home/home.html',
+                controller: 'HomeController'
             });
         $locationProvider.hashPrefix("");
 

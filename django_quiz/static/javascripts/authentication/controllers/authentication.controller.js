@@ -9,9 +9,16 @@
         .module('quiz.authentication.controllers')
         .controller('AuthenticationController', AuthenticationController);
 
-    AuthenticationController.$inject = ['$scope','Authentication'];
+    AuthenticationController.$inject = ['$scope','Authentication','$cookies','$rootScope'];
 
-    function AuthenticationController($scope,Authentication) {
+    function AuthenticationController($scope,Authentication,$cookies,$rootScope) {
+
+        // redirect to homepage if logged in.
+        if($cookies.get('Atkn')){
+             $rootScope.logged_in = true;
+             window.location ='#/';
+        }
+
 
         // Sign Up user
         $scope.signUp = function () {
@@ -27,7 +34,9 @@
             user.$promise.then(signUpSuccessFn,signUpErrorFn);
 
             function signUpSuccessFn(res){
-                console.log(res);
+                $cookies.put('Atkn',res.data.User.token);
+                $rootScope.logged_in = true;
+                window.location ='#/';
             }
 
             function signUpErrorFn(res){
@@ -47,12 +56,15 @@
           is_authenticated.$promise.then(loginSuccessFn,loginErrorFn);
 
           function loginSuccessFn(res){
-              console.log(res);
+              $cookies.put("Atkn",res.data.User.token);
+              $rootScope.logged_in = true;
+              window.location ='#/';
           }
 
           function loginErrorFn(){
               console.log(res);
           }
+
 
         }
     }

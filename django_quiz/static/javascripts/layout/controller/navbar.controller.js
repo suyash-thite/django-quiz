@@ -9,14 +9,32 @@ angular
     .module('quiz.layout.controllers')
     .controller('NavbarController', NavbarController);
 
-    NavbarController.$inject = ['$scope','$cookies'];
+    NavbarController.$inject = ['$rootScope','$cookies','$scope','Unauthenticate'];
 
-    function NavbarController($scope,$cookies){
-        if($cookies.get('Token')){
-            $scope.logged_in = true;
+    function NavbarController($rootScope,$cookies,$scope,Unauthenticate){
+
+        if($cookies.get('Atkn')){
+            $rootScope.logged_in = true;
         }
         else{
-            $scope.logged_in = false;
+            $rootScope.logged_in = false;
+        }
+
+        $scope.logout = function(){
+            var logout = Unauthenticate.Logout.get();
+
+            logout.$promise.then(logoutSuccessFn);
+            function logoutSuccessFn(res){
+                if(res.status == "Error"){
+                 alert(res.error.detail);
+                }
+                else {
+                $cookies.remove('Atkn');
+                $rootScope.logged_in = false;
+                window.location = '#/login';
+                }
+
+            }
         }
     }
 

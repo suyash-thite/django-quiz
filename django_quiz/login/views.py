@@ -38,7 +38,6 @@ class LoginView(APIView):
         response = generateresponse('Success','User',resp_data)
         return Response(response)
 
-
 class LogoutView(APIView):
     """
     API to logout user
@@ -50,6 +49,13 @@ class LogoutView(APIView):
         response = generateresponse('Success','token','null')
         return Response(response)
 
+@login_required
+class UserInfo(APIView):
+    """
+    Get User Information from token
+    """
+    def get(self,request):
+        pass
 
 class RegisterView(APIView):
     """

@@ -5,10 +5,14 @@
 (function(){
 
     angular
-        .module('quiz.layout',['quiz.layout.controllers']);
+        .module('quiz.layout',['quiz.layout.controllers',
+                                'quiz.layout.services']);
 
      angular
         .module('quiz.layout.controllers', []);
+
+     angular
+         .module('quiz.layout.services',[])
 
 
 })();
