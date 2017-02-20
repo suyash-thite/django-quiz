@@ -5,12 +5,15 @@
 (function(){
 
     angular
-        .module('quiz.game',['quiz.game.controllers'
+        .module('quiz.game',['quiz.game.controllers',
+                             'quiz.game.services'
                             ]);
 
      angular
         .module('quiz.game.controllers', []);
 
+     angular
+        .module('quiz.game.services', []);
 
 
 

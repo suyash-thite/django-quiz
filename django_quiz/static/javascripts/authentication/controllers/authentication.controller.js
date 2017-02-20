@@ -15,8 +15,24 @@
 
         // redirect to homepage if logged in.
         if($cookies.get('Atkn')){
-             $rootScope.logged_in = true;
-             window.location ='#/';
+
+            var isAuthenticated = Authentication.Authenticate.get();
+            isAuthenticated.$promise.then(isAuthenticatedSuccess);
+
+            function isAuthenticatedSuccess(res){
+                console.log(res);
+                if (res.status == 'Error') {
+                    $cookies.remove('Atkn');
+                    $rootScope.logged_in = false;
+                    window.location = '#/login';
+                }
+                else{
+                    $rootScope.logged_in = true;
+                    window.location = '#/'
+                }
+            }
+
+
         }
 
 

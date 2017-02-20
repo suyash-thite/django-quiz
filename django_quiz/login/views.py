@@ -49,13 +49,18 @@ class LogoutView(APIView):
         response = generateresponse('Success','token','null')
         return Response(response)
 
-@login_required
+
 class UserInfo(APIView):
     """
     Get User Information from token
     """
+
+    @login_required
     def get(self,request):
-        pass
+        user_obj = request.auth.user
+        serializer = UserSerializer(user_obj)
+        response = generateresponse('Success','User',serializer.data)
+        return Response(response)
 
 class RegisterView(APIView):
     """
@@ -83,4 +88,15 @@ class RegisterView(APIView):
         response = generateresponse('Success','User',resp_data)
         return Response(response)
 
+class Authenticate(APIView):
+    """
+    Authenticate the user
+    """
 
+    def get(self,request):
+        token = request.auth
+        if token is None:
+            raise AuthenticationFailure('Unauthorised Access')
+        else:
+            response = {'token':token.key}
+            return Response(response)

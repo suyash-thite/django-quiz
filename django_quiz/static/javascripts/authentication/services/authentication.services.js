@@ -14,8 +14,10 @@
     function Authentication($resource){
         return {
          Register:$resource('/api/v1/auth/register/'),
-         Login:$resource('api/v1/auth/login/')
+         Login:$resource('api/v1/auth/login/'),
+         Authenticate:$resource('api/v1/auth/authenticate/')
         }
+
     }
 
 
