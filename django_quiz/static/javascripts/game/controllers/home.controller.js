@@ -41,10 +41,13 @@
         user_info.$promise.then(UserSuccessFn);
         function UserSuccessFn(res){
             var data = res.data.User;
-            $scope.first_name = data.first_name;
-            $scope.last_name = data.last_name;
-            $scope.email = data.email;
-            $rootScope.user_id = data.id;
+            $rootScope.user = {
+                'first_name': data.first_name,
+                'last_name': data.last_name,
+                'email': data.email,
+                'user_id': data.id
+            }
+
         }
 
 

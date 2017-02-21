@@ -25,6 +25,7 @@ angular
 
             logout.$promise.then(logoutSuccessFn);
             function logoutSuccessFn(res){
+                console.log(res);
                 if(res.status == "Error"){
                  alert(res.error.detail);
                 }

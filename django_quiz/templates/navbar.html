@@ -4,11 +4,9 @@
     <md-content>
         <md-nav-bar md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links">
             <img src="{% static 'images/quiz.jpg' %}" id="logo">
-
-
             <md-nav-item md-nav-click="goto('page1')" name="page1" ng-show="logged_in">Home</md-nav-item>
             <md-nav-item md-nav-click="goto('page2')" name="page2" ng-show="logged_in">Page Two</md-nav-item>
-            <md-nav-item md-nav-click="goto('page3')" name="page3" ng-show="logged_in">Page Three</md-nav-item>
+            <md-nav-item md-nav-click="goto('page3')" name="page3" ng-show="logged_in">Page 3</md-nav-item>
             <span flex></span>
             <md-menu-bar id="profile" ng-show="logged_in">
                 <md-menu>

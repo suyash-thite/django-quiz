@@ -6,6 +6,8 @@ from rest_framework.authtoken.models import Token
 from django.contrib.auth.models import User
 
 import requests
+from datetime import datetime
+
 from .serializers import UserSerializer
 from qna.helpers import generateresponse
 from django_quiz.common_utils.exceptions import AuthenticationFailure,InvalidInformation,ObjectDoesNotExist
@@ -29,6 +31,8 @@ class LoginView(APIView):
             response = requests.post('http://localhost:8000/api-token-auth/', my_data, headers=headers)
             token = json.loads(response.content)['token']
             token_obj = Token.objects.get(key=token)
+            token_obj.created = datetime.utcnow()
+            token_obj.save()
             user_obj = token_obj.user
         except:
             raise AuthenticationFailure('Incorrect Username or password')
@@ -48,7 +52,6 @@ class LogoutView(APIView):
         token.delete()
         response = generateresponse('Success','token','null')
         return Response(response)
-
 
 class UserInfo(APIView):
     """
@@ -89,6 +92,7 @@ class RegisterView(APIView):
         return Response(response)
 
 class Authenticate(APIView):
+
     """
     Authenticate the user
     """
@@ -100,3 +104,5 @@ class Authenticate(APIView):
         else:
             response = {'token':token.key}
             return Response(response)
+
+
