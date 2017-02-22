@@ -1,0 +1,41 @@
+#logo{
+    height: 48px;
+    width: 130px;
+}
+
+md-nav-bar .md-nav-bar {
+  background: cornsilk;
+}
+
+/*.md-padding{
+    padding: 0px !important;
+}*/
+.container{
+max-width: 400px;
+max-height: 100px;
+margin-top: 10px;
+margin-left: 35%;
+}
+
+
+.space-bot{
+  margin-bottom: 35px;
+}
+
+.text-center{
+  text-align: center;
+}
+
+.signup-screen {
+	  padding: 20px;
+    padding-bottom: 40px;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: 0 1px 6px rgba(0,0,0,.3);
+    color: black;
+}
+
+#profile{
+    margin-top: 10px;
+    cursor: pointer;
+}

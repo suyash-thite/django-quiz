@@ -4,14 +4,19 @@
     <md-content>
         <md-nav-bar md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links">
             <img src="{% static 'images/quiz.jpg' %}" id="logo">
-            <md-nav-item md-nav-click="goto('page1')" name="page1" ng-show="logged_in">Home</md-nav-item>
+            {% verbatim %}
+            <md-nav-item md-nav-click="goto('page1')" name="home"  ng-show="logged_in">Home</md-nav-item>
             <md-nav-item md-nav-click="goto('page2')" name="page2" ng-show="logged_in">Page Two</md-nav-item>
             <md-nav-item md-nav-click="goto('page3')" name="page3" ng-show="logged_in">Page 3</md-nav-item>
             <span flex></span>
-            <md-menu-bar id="profile" ng-show="logged_in">
+            <md-menu-bar ng-click="getInfo()" id="profile" ng-show="logged_in">
                 <md-menu>
-                     <i class="material-icons md-36" ng-click="$mdOpenMenu()">face</i>
+                <i class="material-icons md-36" ng-click="$mdOpenMenu()">face</i>
                      <md-menu-content>
+                            <md-menu-item>
+                                <md-button> Welcome {{ first_name }}</md-button>
+                            </md-menu-item>
+                             <md-menu-divider></md-menu-divider>
                            <md-menu-item>
                                <md-button ng-click="logout()">Logout</md-button>
                            </md-menu-item>
@@ -21,4 +26,4 @@
         </md-nav-bar>
     </md-content>
 </div>
-
+{% endverbatim %}

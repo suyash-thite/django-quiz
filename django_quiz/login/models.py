@@ -8,10 +8,14 @@ from django.dispatch import receiver
 from rest_framework.authtoken.models import Token
 
 
+def upload_to(instance, filename):
+    return 'user_profile_image/{}/{}'.format(instance.user_id, filename)
+
 class Profile(models.Model):
     user = models.OneToOneField(User)
-    bio = models.CharField(max_length=500,blank=True)
-    total_score = models.IntegerField(blank=True)
+    bio = models.TextField(max_length=500,blank=True)
+    total_score = models.IntegerField(blank=True,null=True)
+    profile_image = models.ImageField(blank=True, null=True, upload_to=upload_to)
 
     def __str__(self):
         return "%s %s" %(self.id,self.user)

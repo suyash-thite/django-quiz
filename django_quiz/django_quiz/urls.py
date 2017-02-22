@@ -15,7 +15,8 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from login.views import LoginView,RegisterView,LogoutView,Authenticate,UserInfo
+from django_quiz import settings
+from login.views import LoginView,RegisterView,LogoutView,Authenticate,UserInfo,ProfileDetails,UpdateProfileDetails
 from views import IndexView
 from rest_framework.authtoken import views
 
@@ -30,6 +31,12 @@ urlpatterns = [
     url(r'^api-token-auth/', views.obtain_auth_token),
     url(r'^api/v1/auth/authenticate/$', Authenticate.as_view(),name='authenticate'),
     url(r'^api/v1/user/info/$', UserInfo.as_view(),name='info'),
+    url(r'^api/v1/user/(?P<profile_id>[0-9]+)/profile_details/$', ProfileDetails.as_view(),name='profile'),
+    url(r'^api/v1/user/update_profile/$', UpdateProfileDetails.as_view(),name='update_profile'),
 
-    url(r'^$', IndexView.as_view(), name='index')
+    url(r'^$', IndexView.as_view(), name='index'),
+    url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
+        'document_root': settings.MEDIA_ROOT,
+    }),
+
 ]

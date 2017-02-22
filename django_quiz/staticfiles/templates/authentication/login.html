@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<div class="container">
+            <div id="signup">
+                 <div class="signup-screen">
+                     <div class="space-bot text-center">
+                         <h1>Login</h1>
+                          <md-divider></md-divider>
+                     </div>
+                    <form class="form-register" name="register">
+                        <div>
+                            <div layout-gt-sm="row">
+                                <md-input-container class="md-block" flex-gt-sm="">
+                                    <label for="loginUsername">Username</label>
+                                    <input id="loginUsername" ng-model="loginUsername">
+                                </md-input-container>
+                            </div>
+                            <div layout-gt-sm="row">
+                            <md-input-container class="md-block" flex-gt-sm="">
+                                    <label for ="loginPassword">Password</label>
+                                    <input type="password" id="loginPassword" ng-model="loginPassword">
+                                </md-input-container>
+                            </div>
+                            <div layout-gt-sm="row">
+                                <md-button md-no-ink class="md-raised md-primary" flex-gt-sm="" ng-click="login()">Login</md-button>
+                                <md-button href="# " class="md-primary">New User? Sign Up</md-button>
+                            </div>
+                        </div>
+                    </form>
+                 </div>
+            </div>
+    </div>

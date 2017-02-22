@@ -13,7 +13,6 @@
 
     function HomeController($scope,$cookies,$rootScope,Authentication,HomeServices){
 
-        $scope.first_name = "";
         // redirect to login page if not logged in.
         if($cookies.get('Atkn')){
             var is_authenticated =  Authentication.Authenticate.get();
@@ -37,10 +36,11 @@
 
 
         //Get Info about logged in user
-        var user_info = HomeServices.Info.get();
+
         user_info.$promise.then(UserSuccessFn);
         function UserSuccessFn(res){
             var data = res.data.User;
+            console.log(data);
             $rootScope.user = {
                 'first_name': data.first_name,
                 'last_name': data.last_name,

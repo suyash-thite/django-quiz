@@ -8,8 +8,10 @@ from django.contrib.auth.models import User
 import requests
 from datetime import datetime
 
-from .serializers import UserSerializer
+from .serializers import UserSerializer,ProfileSerializer
 from qna.helpers import generateresponse
+from .models import Profile
+
 from django_quiz.common_utils.exceptions import AuthenticationFailure,InvalidInformation,ObjectDoesNotExist
 from django_quiz.common_utils.security import login_required
 
@@ -106,3 +108,30 @@ class Authenticate(APIView):
             return Response(response)
 
 
+class ProfileDetails(APIView):
+    """
+    Get details about user profile
+    """
+    def get_object(self,user_id):
+        try:
+            user = User.objects.get(id=user_id)
+            return Profile.objects.get(user=user)
+        except:
+            raise ObjectDoesNotExist('User/Profile does not exist')
+
+    @login_required
+    def get(self,request,profile_id):
+        profile = self.get_object(profile_id)
+        serializer = ProfileSerializer(profile)
+        response = generateresponse('Success','profile',serializer.data)
+        return Response(response)
+
+class UpdateProfileDetails(APIView):
+    """
+    Update Profile
+    """
+
+    def post(self,request):
+        data = request.data
+        serializer = ProfileSerializer(data = data)
+        pass

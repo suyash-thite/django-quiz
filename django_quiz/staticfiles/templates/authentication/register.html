@@ -1,0 +1,47 @@
+<div class="container">
+            <div id="signup">
+                 <div class="signup-screen">
+                     <div class="space-bot text-center">
+                         <h1>Sign up</h1>
+                          <md-divider></md-divider>
+                     </div>
+                    <form class="form-register" name="register">
+                        <div>
+                            <div layout-gt-sm="row">
+                                <md-input-container class="md-block" flex-gt-sm="">
+                                    <label for="first_name">First name</label>
+                                    <input id="first_name" ng-model="first_name">
+                                </md-input-container>
+
+                                <md-input-container class="md-block" flex-gt-sm="">
+                                    <label for="last_name">Last Name</label>
+                                    <input id="last_name" ng-model="last_name">
+                                </md-input-container>
+                            </div>
+                            <div layout-gt-sm="row">
+                                <md-input-container class="md-block" flex-gt-sm="">
+                                    <label for ="email">Email</label>
+                                    <input type="email" id="email" ng-model="email">
+                                </md-input-container>
+                            </div>
+                            <div layout-gt-sm="row">
+                                <md-input-container class="md-block" flex-gt-sm="">
+                                    <label for ="username">Username</label>
+                                    <input type="text" id="username" ng-model="username">
+                                </md-input-container>
+
+                                <md-input-container class="md-block" flex-gt-sm="">
+                                    <label for ="password">Password</label>
+                                    <input type="password" id="password" ng-model="password">
+                                </md-input-container>
+                            </div>
+                            <div layout-gt-sm="row">
+                                <md-button md-no-ink class="md-raised md-primary" flex-gt-sm="" ng-click="signUp()">Sign Up </md-button>
+                               <md-button href="#/login" class="md-primary">Already a User? Log in </md-button>
+                            </div>
+                        </div>
+
+                    </form>
+                 </div>
+            </div>
+        </div>
