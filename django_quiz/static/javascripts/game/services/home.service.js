@@ -12,7 +12,8 @@
 
     function HomeServices($resource){
         return{
-            'Info':$resource('api/v1/user/info')
+            'Info':$resource('api/v1/user/info'),
+            'Categories':$resource('api/v1/qna/categories')
         }
     }
 

@@ -72,10 +72,17 @@
           is_authenticated.$promise.then(loginSuccessFn,loginErrorFn);
 
           function loginSuccessFn(res){
-              $cookies.put("Atkn",res.data.User.token);
-              $rootScope.logged_in = true;
-              window.location ='#/';
+              if(res.status == 'Error'){
+                  $scope.invalid = true;
+              }
+              else {
+                  $scope.invalid = false;
+                  $cookies.put("Atkn", res.data.User.token);
+                  $rootScope.logged_in = true;
+                  window.location = '#/';
+              }
           }
+
 
           function loginErrorFn(){
               console.log(res);

@@ -36,9 +36,10 @@ class CategorySerializer(serializers.ModelSerializer):
     """
     Serializer for Category object from qna.models
     """
-    model = Question
-    fields =  ('id', 'question_identifier','question_text','question_tags','question_category')
-    depth = 1
+    class Meta:
+        model = Category
+        fields = ('id','category_name','category_tags')
+
 
 
 
@@ -46,6 +47,7 @@ class AnswerSerializer(serializers.ModelSerializer):
      """
      Answer Serializer
      """
+
      class Meta:
         model = Answers
         fields = '__all__'
@@ -61,11 +63,9 @@ class QuestionSerializer(serializers.ModelSerializer):
     question_category = CategorySerializer(many=True)
 
     class Meta:
-        model = Answers
-        fields = '__all__'
-
-
-
+        model = Question
+        fields = ('id', 'question_identifier','question_text','question_tags','question_category')
+        depth = 1
 
     def create(self, validated_data):
         for quest_category in validated_data['question_category']:
@@ -85,8 +85,6 @@ class OptionSerializer(serializers.ModelSerializer):
     """
     Serializer for options from qna.models
     """
-
-
     class Meta:
         model = Options
         fields = '__all__'

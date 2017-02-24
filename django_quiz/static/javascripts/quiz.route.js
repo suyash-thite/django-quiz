@@ -23,6 +23,10 @@
                 url:'/',
                 templateUrl: '/static/templates/home/home.html',
                 controller: 'HomeController'
+            }).state('profile',{
+                url:'/myProfile',
+                templateUrl: '/static/templates/home/profile.html',
+                controller: 'ProfileController'
             });
         $locationProvider.hashPrefix("");
 

@@ -36,20 +36,26 @@
 
 
         //Get Info about logged in user
-
+        var user_info = HomeServices.Info.get();
         user_info.$promise.then(UserSuccessFn);
         function UserSuccessFn(res){
             var data = res.data.User;
-            console.log(data);
             $rootScope.user = {
                 'first_name': data.first_name,
                 'last_name': data.last_name,
                 'email': data.email,
                 'user_id': data.id
             }
-
         }
 
+        // Get Categories
+        var categories = HomeServices.Categories.get();
+        categories.$promise.then(CategorySuccessFn);
+        function CategorySuccessFn(res){
+             $scope.category1 = (res.data.Categories)[0].category_name;
+             $scope.category2 = (res.data.Categories)[1].category_name;
+             $scope.category3 = (res.data.Categories)[2].category_name;
+        }
 
     }
 

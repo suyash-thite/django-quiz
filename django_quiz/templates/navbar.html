@@ -14,7 +14,17 @@
                 <i class="material-icons md-36" ng-click="$mdOpenMenu()">face</i>
                      <md-menu-content>
                             <md-menu-item>
-                                <md-button> Welcome {{ first_name }}</md-button>
+                              <md-menu>
+                                 <md-button ng-click="$mdOpenMenu()"> Welcome {{ first_name }}</md-button>
+                                  <md-menu-content>
+                                    <md-menu-item>
+                                      <md-button> Settings</md-button>
+                                    </md-menu-item>
+                                      <md-menu-item>
+                                      <md-button href="#/myProfile"> View Your Profile </md-button>
+                                    </md-menu-item>
+                                  </md-menu-content>
+                              </md-menu>
                             </md-menu-item>
                              <md-menu-divider></md-menu-divider>
                            <md-menu-item>

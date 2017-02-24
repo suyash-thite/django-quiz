@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 
+
 from django.db import models
 from django.contrib.auth.models import User
 from django.conf import settings
@@ -26,3 +27,5 @@ class Profile(models.Model):
 def create_auth_token(sender, instance=None, created=False, **kwargs):
     if created:
         Token.objects.create(user=instance)
+        Profile.objects.create(user=instance)
+

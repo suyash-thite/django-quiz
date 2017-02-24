@@ -79,13 +79,13 @@ class RegisterView(APIView):
             first_name = data['first_name']
             last_name = data['last_name']
             email = data['email']
-            user = User.objects.create_user(username=uname, password=passwd,email=email,
+            new_user = User.objects.create_user(username=uname, password=passwd,email=email,
                                             first_name=first_name, last_name=last_name)
         except:
             raise InvalidInformation("The information entered is invalid or incorrect")
-        serializer = UserSerializer(user)
+        serializer = UserSerializer(new_user)
         try:
-            token = Token.objects.get(user=user)
+            token = Token.objects.get(user=new_user)
             resp_data = serializer.data
             resp_data['token'] = token.key
         except:
@@ -131,7 +131,17 @@ class UpdateProfileDetails(APIView):
     Update Profile
     """
 
-    def post(self,request):
+    @login_required
+    def patch(self,request):
         data = request.data
-        serializer = ProfileSerializer(data = data)
-        pass
+        try:
+            user = request.user
+        except:
+            raise InvalidInformation('User is not present')
+        serializer = ProfileSerializer(user, data=request.data, context={'request': request})
+        if serializer.is_valid():
+            serializer.save()
+        else:
+            raise InvalidInformation(serializer.errors)
+        response = generateresponse('Success','profile',serializer.data)
+        return Response(response)

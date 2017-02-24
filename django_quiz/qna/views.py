@@ -30,7 +30,7 @@ class QuestionList(APIView):
         serializer = QuestionSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
-            response = generateresponse('Success','Question',serializer.data)
+            response = generateresponse('Success','question',serializer.data)
             return Response(response)
         else:
             raise InvalidInformation(serializer.errors)
