@@ -19,6 +19,7 @@ from django_quiz import settings
 from login.views import LoginView,RegisterView,LogoutView,Authenticate,UserInfo,ProfileDetails,UpdateProfileDetails
 from views import IndexView
 from rest_framework.authtoken import views
+from django.conf.urls.static import static
 
 
 
@@ -34,9 +35,10 @@ urlpatterns = [
     url(r'^api/v1/user/(?P<profile_id>[0-9]+)/profile_details/$', ProfileDetails.as_view(),name='profile'),
     url(r'^api/v1/user/update_profile/$', UpdateProfileDetails.as_view(),name='update_profile'),
 
-    url(r'^$', IndexView.as_view(), name='index'),
-    url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
-        'document_root': settings.MEDIA_ROOT,
-    }),
 
-]
+    url(r'^$', IndexView.as_view(), name='index'),
+    # url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
+    #     'document_root': settings.MEDIA_ROOT,
+    # }),
+
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

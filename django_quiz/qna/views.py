@@ -1,10 +1,11 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
-from models import Question, Category, Options
+from models import Question, Category, Options, Answers
 from helpers import generateresponse
 from serializers import QuestionSerializer,CategorySerializer,OptionSerializer
 from django_quiz.common_utils.exceptions import InvalidInformation,ObjectDoesNotExist
+from django_quiz.common_utils.security import login_required
 
 
 class QuestionList(APIView):
@@ -13,16 +14,26 @@ class QuestionList(APIView):
     """
 
     def get(self, request):
-        response = ''
-        try:
-            questions = Question.objects.all()
-        except:
-            raise ObjectDoesNotExist('Question does not exist')
-        try:
-            serializer = QuestionSerializer(questions, many=True)
-            response = generateresponse('Success', 'Questions', serializer.data)
-        except Exception as e:
-            print e
+        filter = request.query_params.dict()
+        if filter == {}:
+            response = ''
+            try:
+                questions = Question.objects.all()
+            except:
+                raise ObjectDoesNotExist('Question does not exist')
+            try:
+                serializer = QuestionSerializer(questions, many=True)
+                response = generateresponse('Success', 'questions', serializer.data)
+            except Exception as e:
+                print e
+        else:
+            if 'category' in filter:
+                category = filter['category']
+                questions = Question.objects.filter(question_category__category_name=category)
+                serializer = QuestionSerializer(questions, many=True)
+                response = generateresponse('Success', 'questions', serializer.data)
+            else:
+                raise InvalidInformation('Filter given is not present')
         return Response(response)
 
     def post(self, request):
@@ -96,6 +107,27 @@ class OptionList(APIView):
             raise ObjectDoesNotExist('Options does not exist')
         serializer = OptionSerializer(options)
         response = generateresponse('Success','Options',serializer.data)
+        return Response(response)
+
+
+
+class CheckAnswer(APIView):
+
+
+    def get(self,request,question_id):
+        is_correct = False
+        try:
+            q_obj = Question.objects.get(id=question_id)
+            correct_answer = Answers.objects.get(question=q_obj).answer
+        except:
+            raise InvalidInformation('Question does not exist')
+        user_answer = request.query_params.dict()['answer']
+        if user_answer == correct_answer:
+            is_correct = True
+        response = {
+                     "question_id":question_id,
+                     "is_correct":is_correct
+                   }
         return Response(response)
 
 

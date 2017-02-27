@@ -145,3 +145,4 @@ class UpdateProfileDetails(APIView):
             raise InvalidInformation(serializer.errors)
         response = generateresponse('Success','profile',serializer.data)
         return Response(response)
+
