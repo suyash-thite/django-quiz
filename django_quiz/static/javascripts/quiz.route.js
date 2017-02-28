@@ -27,6 +27,10 @@
                 url:'/myProfile',
                 templateUrl: '/static/templates/home/profile.html',
                 controller: 'ProfileController'
+            }).state('game',{
+                url:'/game/:category',
+                templateUrl: '/static/templates/home/game.html',
+                controller: 'MainquizController'
             });
         $locationProvider.hashPrefix("");
 

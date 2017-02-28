@@ -27,13 +27,14 @@ class QuestionList(APIView):
             except Exception as e:
                 print e
         else:
-            if 'category' in filter:
-                category = filter['category']
-                questions = Question.objects.filter(question_category__category_name=category)
-                serializer = QuestionSerializer(questions, many=True)
-                response = generateresponse('Success', 'questions', serializer.data)
+            if 'category' in filter and 'is_play' in filter:
+                if filter['is_play'] == 'false':
+                    category = filter['category']
+                    questions = Question.objects.filter(question_category__id=category)
+                    serializer = QuestionSerializer(questions, many=True)
+                    response = generateresponse('Success', 'questions', serializer.data)
             else:
-                raise InvalidInformation('Filter given is not present')
+                raise InvalidInformation('Filter/is_play is not present')
         return Response(response)
 
     def post(self, request):

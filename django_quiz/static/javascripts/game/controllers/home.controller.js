@@ -52,10 +52,18 @@
         var categories = HomeServices.Categories.get();
         categories.$promise.then(CategorySuccessFn);
         function CategorySuccessFn(res){
-             $scope.category1 = (res.data.Categories)[0].category_name;
-             $scope.category2 = (res.data.Categories)[1].category_name;
-             $scope.category3 = (res.data.Categories)[2].category_name;
+             $scope.category1 = (res.data.Categories)[0];
+             $scope.category2 = (res.data.Categories)[1];
+             $scope.category3 = (res.data.Categories)[2];
         }
+
+
+           /*var questions = HomeServices.Questions.get({'category':category.id,'is_play':false});
+           questions.$promise.then(questionSuccessFn);
+           function questionSuccessFn(res){
+               console.log(res);
+           }*/
+
 
     }
 
