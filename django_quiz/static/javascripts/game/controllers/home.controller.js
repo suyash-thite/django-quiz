@@ -58,11 +58,7 @@
         }
 
 
-           /*var questions = HomeServices.Questions.get({'category':category.id,'is_play':false});
-           questions.$promise.then(questionSuccessFn);
-           function questionSuccessFn(res){
-               console.log(res);
-           }*/
+
 
 
     }

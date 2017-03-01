@@ -85,10 +85,13 @@ class OptionSerializer(serializers.ModelSerializer):
     """
     Serializer for options from qna.models
     """
+    question = QuestionSerializer()
+
     class Meta:
         model = Options
         fields = '__all__'
-        depth = 2
+        depth = 1
+
 
 
 

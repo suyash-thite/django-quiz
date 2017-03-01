@@ -131,5 +131,3 @@ class CheckAnswer(APIView):
                    }
         return Response(response)
 
-
-
