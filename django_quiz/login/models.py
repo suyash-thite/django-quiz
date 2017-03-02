@@ -16,6 +16,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User)
     bio = models.TextField(max_length=500,blank=True)
     total_score = models.IntegerField(blank=True,null=True)
+    favourite_categories = models.ManyToManyField('qna.Category',blank=True)
     profile_image = models.ImageField(blank=True, null=True, upload_to=upload_to)
 
     def __str__(self):

@@ -1,8 +1,8 @@
 from django.conf.urls import url, include
 from django.contrib import admin
 
-from views import QuestionList, QuestionDetail,CategoryList, OptionList,CheckAnswer
-from .category_quiz.category_quiz import CategoryQuiz
+from views import QuestionList, QuestionDetail,CategoryList, OptionList
+from .category_quiz.category_quiz import CategoryQuiz,CheckAnswer
 from django.conf import settings
 
 

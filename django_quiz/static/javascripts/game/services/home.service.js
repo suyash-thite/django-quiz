@@ -14,9 +14,10 @@
         return{
             'Info':$resource('api/v1/user/info'),
             'Categories':$resource('api/v1/qna/categories'),
-            'Questions': $resource('api/v1/qna/questions/')/*:category',{
+            'Questions': $resource('api/v1/qna/questions'),
+            'Quiz':$resource('api/v1/qna/quiz/category/:category',{
                 category:'@category'
-            })*/
+            })
         }
     }
 

@@ -12,14 +12,21 @@
     MainquizController.$inject = ['$scope','HomeServices','$stateParams'];
 
     function MainquizController($scope,HomeServices,$stateParams){
+        var my_questions = [];
 
         // Get Questions of chosen category
         var category = JSON.parse($stateParams.category);
-        var questions = HomeServices.Questions.get({'category':category.id,'is_play':false});
+        $scope.category_name = category.category_name;
+        var questions = HomeServices.Quiz.get({'category':category.id});
            questions.$promise.then(questionSuccessFn);
            function questionSuccessFn(res){
-               console.log(res);
+               angular.forEach(res.data.Quiz,function(question){
+                   console.log(question);
+                   my_questions.push(question);
+               });
            }
+
+
     }
 
 

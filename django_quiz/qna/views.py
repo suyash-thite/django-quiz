@@ -112,22 +112,4 @@ class OptionList(APIView):
 
 
 
-class CheckAnswer(APIView):
-
-
-    def get(self,request,question_id):
-        is_correct = False
-        try:
-            q_obj = Question.objects.get(id=question_id)
-            correct_answer = Answers.objects.get(question=q_obj).answer
-        except:
-            raise InvalidInformation('Question does not exist')
-        user_answer = request.query_params.dict()['answer']
-        if user_answer == correct_answer:
-            is_correct = True
-        response = {
-                     "question_id":question_id,
-                     "is_correct":is_correct
-                   }
-        return Response(response)
 

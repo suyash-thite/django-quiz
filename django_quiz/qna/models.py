@@ -29,7 +29,7 @@ class Question(models.Model):
 
 
 class Options(models.Model):
-    question = models.OneToOneField('Question', blank=False, null=False)
+    question = models.OneToOneField('Question', related_name='options', blank=False, null=False)
     number_of_options = models.IntegerField(blank=False)
     option1 = models.CharField(max_length=255,blank=False,null=True)
     option2 = models.CharField(max_length=255,blank=False,null=True)
@@ -47,7 +47,7 @@ class Options(models.Model):
 
 
 class Answers(models.Model):
-    question = models.OneToOneField('Question', blank=False, null=False)
+    question = models.OneToOneField('Question',related_name='answers', blank=False, null=False)
     answer = models.CharField(max_length=255)
 
     def __str__(self):

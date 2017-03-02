@@ -60,11 +60,11 @@ class QuestionSerializer(serializers.ModelSerializer):
     """
     Serializer for Question object from qna.models
     """
-    question_category = CategorySerializer(many=True)
+    question_category = CategorySerializer(many=True,write_only=True)
 
     class Meta:
         model = Question
-        fields = ('id', 'question_identifier','question_text','question_tags','question_category')
+        fields = ('id', 'options', 'question_identifier','question_text','question_tags','question_category')
         depth = 1
 
     def create(self, validated_data):
