@@ -9,8 +9,11 @@
             <span class="md-headline">{{ category1.category_name }}</span>
           </md-card-title-text>
      </md-card-title>
+    <md-card-title-media >
+      <img src="{{ category1.category_image }}" class="categoryImage">
+    </md-card-title-media>
      <md-card-actions layout="row" layout-align="end center">
-          <md-button href="#/game/{{ category1}}">Play</md-button>
+          <md-button href="#/game/{{ category1.id}}">Play</md-button>
      </md-card-actions>
   </md-card>
    </div>
@@ -22,8 +25,11 @@
             <span class="md-headline">{{ category2.category_name }}</span>
           </md-card-title-text>
      </md-card-title>
+    <md-card-title-media >
+      <img src="{{ category2.category_image }}" class="categoryImage">
+    </md-card-title-media>
     <md-card-actions layout="row" layout-align="end center">
-          <md-button href="#/game/{{ category2}}">Play</md-button>
+          <md-button href="#/game/{{ category2.id}}">Play</md-button>
     </md-card-actions>
   </md-card>
     </div>
@@ -36,8 +42,11 @@
             <span  class="md-headline">{{ category3.category_name }}</span>
           </md-card-title-text>
      </md-card-title>
+    <md-card-title-media >
+      <img src="{{ category3.category_image }}" class="categoryImage">
+    </md-card-title-media>
     <md-card-actions layout="row" layout-align="end center">
-          <md-button href="#/game/{{ category3 }}">Play</md-button>
+          <md-button href="#/game/{{ category3.id }}">Play</md-button>
     </md-card-actions>
   </md-card>
     </div>

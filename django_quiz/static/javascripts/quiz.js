@@ -8,6 +8,7 @@ angular
         'ngMessages',
         'ngCookies',
         'ngResource',
+        'angularUtils.directives.dirPagination',
         'quiz.routes',
         'quiz.layout',
         'quiz.authentication',

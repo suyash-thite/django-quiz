@@ -43,3 +43,7 @@ margin-left: 35%;
 .invalid{
     color: red;
 }
+
+.categoryImage{
+    height:140px;
+}

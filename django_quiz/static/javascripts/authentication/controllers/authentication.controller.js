@@ -20,7 +20,6 @@
             isAuthenticated.$promise.then(isAuthenticatedSuccess);
 
             function isAuthenticatedSuccess(res){
-                console.log(res);
                 if (res.status == 'Error') {
                     $cookies.remove('Atkn');
                     $rootScope.logged_in = false;

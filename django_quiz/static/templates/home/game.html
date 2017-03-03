@@ -1,6 +1,9 @@
 <md-content class="md-padding">
-<h1 style="text-align: center"> {{ category_name }} Quiz </h1>
+<h1 style="text-align: center">  Quiz </h1>
 <section layout="row" layout-align="center center" layout-wrap>
-<md-button ng-click="" class="md-raised md-primary" style="background: green">Begin</md-button>
+<md-button ng-hide="quizStart" ng-click="beginQuiz()" class="md-raised md-primary" style="background: green">Begin</md-button>
+<!--ul ng-show="quizStart" ng-repeat="question in questions ">
+  <li>{{ question.question_text }}</li>
+</ul-->
 </section>
 </md-content>

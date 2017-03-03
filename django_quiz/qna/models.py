@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 import random
 
+
 from django.db.models import Count
 from django.db import models
 
@@ -53,10 +54,13 @@ class Answers(models.Model):
     def __str__(self):
         return '%s: %s' %(self.pk,self.answer)
 
+def upload_to(instance, filename):
+    return 'category_image/{}/{}'.format(instance.category_name, filename)
 
 class Category(models.Model):
     category_name = models.CharField(max_length=255, blank=False, null=False)
     category_tags = models.TextField(blank=True)
+    category_image = models.ImageField(blank=True, null=True, upload_to=upload_to)
 
     def __str__(self):
         return "%s:%s" % (self.pk, self.category_name)
