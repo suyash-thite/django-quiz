@@ -21,6 +21,11 @@ class CategoryQuiz(APIView):
         except Exception as e:
             raise ObjectDoesNotExist(e)
         serializer = QuestionSerializer(questions,many=True)
+        for data in serializer.data:
+            no_of_options = data['options']['number_of_options']
+            key_list = data['options'].keys()
+            for i in range(no_of_options+1,len(key_list)):
+                del data['options'][key_list[i]]
         response = generateresponse('Success','Quiz',serializer.data)
         return Response(response)
 

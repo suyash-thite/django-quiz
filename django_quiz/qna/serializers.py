@@ -54,6 +54,14 @@ class AnswerSerializer(serializers.ModelSerializer):
 
 
 
+class OptionSerializer(serializers.ModelSerializer):
+    """
+    Serializer for options from qna.models
+    """
+
+    class Meta:
+        model = Options
+        fields = ('number_of_options','option1', 'option2', 'option3','option4','option5','option6','option7','option8','option9','option10')
 
 
 class QuestionSerializer(serializers.ModelSerializer):
@@ -61,6 +69,7 @@ class QuestionSerializer(serializers.ModelSerializer):
     Serializer for Question object from qna.models
     """
     question_category = CategorySerializer(many=True,write_only=True)
+    options = OptionSerializer()
 
     class Meta:
         model = Question
@@ -81,16 +90,8 @@ class QuestionSerializer(serializers.ModelSerializer):
 
 
 
-class OptionSerializer(serializers.ModelSerializer):
-    """
-    Serializer for options from qna.models
-    """
-    question = QuestionSerializer()
 
-    class Meta:
-        model = Options
-        fields = '__all__'
-        depth = 1
+
 
 
 

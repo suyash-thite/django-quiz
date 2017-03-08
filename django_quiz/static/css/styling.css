@@ -47,3 +47,12 @@ margin-left: 35%;
 .categoryImage{
     height:140px;
 }
+
+.questions{
+    margin-top: 10px;
+}
+
+.questionText{
+    font-weight: bold;
+    font-size: 20px;
+}
