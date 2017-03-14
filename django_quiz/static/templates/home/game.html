@@ -1,5 +1,7 @@
 <md-content class="md-padding">
-<h1 style="text-align: center" ng-hide="quizStart">  Quiz </h1>
+<section layout="row" layout-align="center center" ng-hide="quizStart" layout-wrap>
+<img src="{{chosen_category.data.category.category_image }}"><br>
+</section>
 <section layout="row" layout-align="center center" layout-wrap>
 <md-button ng-hide="quizStart" ng-click="beginQuiz()" class="md-raised md-primary" style="background: green">Begin</md-button>
 </section>
@@ -7,7 +9,7 @@
   <ul style="list-style: none;" ng-show="quizStart">
     <li class="questionText">{{ question.question_text }}</li>
     <br>
-    <md-radio-group ng-model="answer">
+    <md-radio-group ng-model="answer" ng-change="checkanswer()">
       <md-radio-button value="{{ option }}" ng-repeat="option in options">{{ option }}</md-radio-button>
     </md-radio-group>
   </ul>

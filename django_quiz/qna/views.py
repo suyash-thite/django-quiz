@@ -91,6 +91,21 @@ class CategoryList(APIView):
         else:
             raise InvalidInformation(serializer.errors)
 
+class CategoryDetail(APIView):
+    """
+    Get a single category
+    """
+
+    def get(self,request,category_id):
+        try:
+            category = Category.objects.get(id=category_id)
+        except:
+            raise ObjectDoesNotExist('Categories do not exist')
+        serializer = CategorySerializer(category)
+        response = generateresponse('Success','category',serializer.data)
+        return Response(response)
+
+
 class OptionList(APIView):
     """
     Lists options for a particular question

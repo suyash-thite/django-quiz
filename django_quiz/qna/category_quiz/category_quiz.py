@@ -47,7 +47,8 @@ class CheckAnswer(APIView):
                 is_correct = True
         response = {
                     "question_id": question_id,
-                    "is_correct": is_correct
+                    "is_correct": is_correct,
+                    "correct_answer":correct_answer
                    }
         return Response(response)
 
