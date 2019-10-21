@@ -31,7 +31,7 @@ django-rest==0.0.1
 django-rest-swagger==2.0.7
 djangorestframework==3.4.0
 duplicity==0.7.6
-ecdsa==0.13
+ecdsa==0.13.3
 enum34==1.1.2
 Flask==0.11.1
 Flask-Admin==1.4.2
