@@ -45,7 +45,7 @@ ipdb==0.10.1
 ipython==2.4.1
 itsdangerous==0.24
 itypes==1.1.0
-Jinja2==2.8
+Jinja2==2.11.3
 keyring==7.3
 launchpadlib==1.10.3
 lazr.restfulclient==0.13.4
