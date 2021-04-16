@@ -21,7 +21,7 @@ defer==1.0.6
 dirspec==13.10
 distlib==0.2.2
 Django==1.10.3
-django-debug-toolbar==1.5
+django-debug-toolbar==1.11.1
 django-extensions==1.7.4
 django-filter==0.14.0
 django-jsonfield==1.0.1
