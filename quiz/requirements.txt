@@ -117,7 +117,7 @@ SQLAlchemy==1.0.13
 sqlparse==0.2.1
 stripe==1.37.0
 tweepy==3.5.0
-Twisted==16.0.0
+Twisted==22.1.0
 ubuntuone-client-data==14.4
 unity-lens-photos==1.0
 uritemplate==3.0.0
